@@ -18,7 +18,7 @@ description: >
 
 You are taking one slice of a spec from "not started" to "pull request ready for review" without
 the developer running each step by hand. A slice is one row of the spec's "Work breakdown" table
-and becomes one pull request (`AGENTS.md`, "Specs"). The developer reads only what you put in
+and becomes one pull request (the `spec-clarify` skill). The developer reads only what you put in
 chat: a short report at the end, or a clear stop when something needs them.
 
 The work is a fixed sequence of stages. A script, `scripts/slice.sh` beside this file,

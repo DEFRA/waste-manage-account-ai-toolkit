@@ -40,7 +40,3 @@ To install it:
 - **Codex:** run `install.sh` from the toolkit repo; run it again to update.
 
 Stop and tell the developer to install the toolkit when a skill is not available.
-
-## Specs
-
-A new spec comes from the `spec-clarify` skill and always has a Work breakdown, with a single slice when the work is one pull request; a spec whose work exceeds the PR size guide stays one spec and is sliced in its Work breakdown, one pull request per slice. A delivered spec (its story merged) is never edited: record the change in the new spec and name the spec it supersedes.

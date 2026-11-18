@@ -45,5 +45,5 @@ Shared by the Manage Account repos from the DEFRA [common coding standards](http
 ## Documentation and licensing
 
 - Document the _how_ for the project: how to build, run, test and use it. The README follows the DEFRA [README standards](https://github.com/DEFRA/software-development-standards/blob/main/docs/standards/readme_standards.md); update it when setup, run or test steps change.
-- Design decisions live in `specs/` (see "Specs" in `AGENTS.md`), not in chat history or commit messages alone.
+- Design decisions live in the spec files in the Repo profile's `Specs folder`, not in chat history or commit messages alone.
 - The repo carries the Open Government Licence v3 and the README states the licence.

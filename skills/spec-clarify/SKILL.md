@@ -55,16 +55,15 @@ When the table or one of these entries is absent, stop and report
 - **Ask, do not assume.** Work through the phases below one topic at a time, in chat, offering
   options where you can and waiting for the answer. Use the tool's question facility if it has
   one; plain questions in chat are fine otherwise.
-- **Read before asking.** Read `AGENTS.md` (especially "Specs"), the latest two specs in the
-  `Specs folder` for format and prior decisions, and the code the idea touches. Confirm what
-  already exists with a code search before calling anything missing.
+- **Read before asking.** Read `AGENTS.md`, the `Specs only` ground rule below, the latest two
+  specs in the `Specs folder` for format and prior decisions, and the code the idea touches.
+  Confirm what already exists with a code search before calling anything missing.
 - **Sources are referenced, not pasted.** Ask the author to paste the Jira story text, comments
   and the relevant Confluence section if you cannot read them; cite them by title and date in the
   spec. Never put credentials or personal data into the spec.
 - **Specs only.** Write one file in the `Specs folder`. Do not change code, tests or any other
   spec. A delivered spec (one whose story is merged) is never edited: a change to something it
-  decided is recorded in the new spec's Decisions with the earlier spec named (AGENTS.md,
-  "Specs").
+  decided is recorded in the new spec's Decisions with the earlier spec named.
 - **Testable means testable here.** Every acceptance criterion names an observable result a
   test in a project in `Test projects` can check.
 

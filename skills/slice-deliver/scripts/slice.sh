@@ -97,7 +97,7 @@ resolve_spec() {
     number=$((10#$arg))
     padded=$(printf '%04d' "$number")
     short=$(printf '%03d' "$number")
-    matches=$(find "$specs_folder" -maxdepth 1 \( -name "$padded-*.md" -o -name "$short-*.md" \) 2> /dev/null | sort -u || true)
+    matches=$(find "$specs_folder/" -maxdepth 1 \( -name "$padded-*.md" -o -name "$short-*.md" \) 2> /dev/null | sort -u || true)
     count=$(printf '%s' "$matches" | grep -c . || true)
     [[ $count -eq 1 ]] || die "expected one spec matching $specs_folder/$padded-*.md or $specs_folder/$short-*.md, found $count"
     echo "$matches"

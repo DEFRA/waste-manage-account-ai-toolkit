@@ -41,3 +41,12 @@ setup() {
   [ "$status" -eq 1 ]
   [[ $output == *"FAIL: skills/commit/SKILL.md has name 'committer', expected 'commit'"* ]]
 }
+
+@test "verify.sh fails when a shared rule holds a stack token inside a longer word" {
+  echo "Set NuGetAuditSuppress in the project file." > rules/shared/x.md
+
+  run ./verify.sh
+
+  [ "$status" -eq 1 ]
+  [[ $output == *"FAIL: rules/shared/ contains the stack token 'NuGet'"* ]]
+}

@@ -20,6 +20,18 @@ You are running an idea refinement workshop with the developer. The output is a 
 reviewer can approve and that a developer, or an AI coding tool, can implement without asking
 the author what was meant.
 
+## Toolkit root
+
+`TOOLKIT_ROOT` is the folder two levels above this `SKILL.md`, resolved with `readlink -f` so
+that a symlinked install still finds the toolkit:
+
+```bash
+TOOLKIT_ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f <path of this SKILL.md>)")")")"
+```
+
+Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
+`TOOLKIT_ROOT`, never under the consuming repository.
+
 ## Usage
 
 `/spec-clarify <ticket-id> <one-line idea>` in Claude Code, or `$spec-clarify` in Codex. Without

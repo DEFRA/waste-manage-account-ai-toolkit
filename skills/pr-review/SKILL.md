@@ -27,6 +27,18 @@ This skill is tool-agnostic: it assumes only a shell with `git` and the `gh` CLI
 If your tool supports subagents you may run the lenses below in parallel;
 otherwise work through them in order. The result must be the same either way.
 
+## Toolkit root
+
+`TOOLKIT_ROOT` is the folder two levels above this `SKILL.md`, resolved with `readlink -f` so
+that a symlinked install still finds the toolkit:
+
+```bash
+TOOLKIT_ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f <path of this SKILL.md>)")")")"
+```
+
+Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
+`TOOLKIT_ROOT`, never under the consuming repository.
+
 ## Repo profile
 
 Read the `## Repo profile` table in the consuming repo's `AGENTS.md` before

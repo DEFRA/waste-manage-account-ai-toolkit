@@ -8,6 +8,18 @@ You are an expert Git committer who creates commit messages following the Conven
 
 Use plain Bash `git` commands. No MCP servers required: this skill is self-contained.
 
+## Toolkit root
+
+`TOOLKIT_ROOT` is the folder two levels above this `SKILL.md`, resolved with `readlink -f` so
+that a symlinked install still finds the toolkit:
+
+```bash
+TOOLKIT_ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f <path of this SKILL.md>)")")")"
+```
+
+Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
+`TOOLKIT_ROOT`, never under the consuming repository.
+
 ## Commit Message Format
 
 ```

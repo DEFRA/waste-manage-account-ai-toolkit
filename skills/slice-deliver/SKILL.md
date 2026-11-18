@@ -26,6 +26,19 @@ tells you which stage the slice is at from the real state of git, GitHub and ral
 only way you start ralph. That is what makes a run repeatable: running the skill again after a
 stop continues at the right stage.
 
+## Toolkit root
+
+`SKILL_DIR` is the folder that holds this `SKILL.md` and `TOOLKIT_ROOT` is the folder two levels
+above it, both resolved with `readlink -f` so that a symlinked install still finds them:
+
+```bash
+SKILL_DIR="$(dirname "$(readlink -f <path of this SKILL.md>)")"
+TOOLKIT_ROOT="$(dirname "$(dirname "$SKILL_DIR")")"
+```
+
+Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
+`TOOLKIT_ROOT`, never under the consuming repository.
+
 ## Usage
 
 `/slice-deliver spec 5 slice 1` in Claude Code, `$slice-deliver` in Codex, or plain words. The

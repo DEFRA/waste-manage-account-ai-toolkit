@@ -98,6 +98,18 @@ has_line() {
   has_line "blocker=profile: missing Specs folder"
 }
 
+@test "status reports a profile without Gate prerequisites as a blocker" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec specs/0001-x.md
+  commit_fixture
+
+  run "$SLICE" status 1 1
+
+  [ "$status" -eq 0 ]
+  has_line "blocker=profile: missing Gate prerequisites"
+  [[ $output != *"missing Spec file naming"* ]]
+}
+
 @test "a spec number resolves a four-digit spec in the Specs folder" {
   write_profile '| Specs folder | `specs/` |'
   write_spec specs/0004-x.md

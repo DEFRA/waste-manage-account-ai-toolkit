@@ -244,7 +244,6 @@ load_facts() {
     specs_folder=$(profile_value "Specs folder")
     specs_folder=${specs_folder%/}
     specs_folder=${specs_folder#./}
-    spec_file_naming=$(profile_value "Spec file naming")
     gate_prerequisites=$(profile_value "Gate prerequisites")
     spec_file=$(resolve_spec "$spec_arg")
     slice=$slice_arg
@@ -422,7 +421,7 @@ collect_blockers() {
         have "$tool" || block "tools: '$tool' is not installed or not on PATH"
     done
     [[ -n $specs_folder ]] || block "profile: missing Specs folder"
-    [[ -n $spec_file_naming ]] || block "profile: missing Spec file naming"
+    [[ -n $gate_prerequisites ]] || block "profile: missing Gate prerequisites"
 
     if [[ -z $branch ]]; then
         block "branch: HEAD is detached; check out the slice's branch"

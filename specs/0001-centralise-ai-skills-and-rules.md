@@ -87,7 +87,8 @@ The skill set is `commit`, `spec-clarify`, `slice-deliver`, `pr-review` and `pr-
   into Codex's user-level skills folder. Running it again updates the skills.
 
 The rules ship with the skills. A skill that needs a rule reads it from the toolkit, not from the
-consuming repo.
+consuming repo. The rules also apply to work done without a skill: the thin `AGENTS.md` says where
+the installed toolkit is in each tool and which rule to read for which kind of task.
 
 ### Skills read a repo profile
 
@@ -123,8 +124,8 @@ holds only:
 - the Repo profile;
 - constraints that exist only in that repo (for example Liquibase and the v1 tests in
   `waste-organisations`), and that repo's accepted deviations from a shared or stack rule;
-- the required toolkit, how to install it, and an instruction to stop when a toolkit skill is
-  not available.
+- the required toolkit, how to install it, where its rules are installed and when to read each,
+  and an instruction to stop when a toolkit skill or the toolkit folder is not available.
 
 `doc/rules/`, `.agents/skills/`, `.claude/skills/` and `.claude/rules/` are deleted from each
 consuming repo.
@@ -180,6 +181,7 @@ follow adoption.
 | `AGENTS.md` | Stays in each repo in a thin form, because no tool-neutral local install delivers always-on rules. 18 November 2026. |
 | Skill set | `commit`, `pr-preflight`, `pr-review`, `slice-deliver` and `spec-clarify` in every repo. Author, 18 November 2026. `spec-breakdown` is therefore dropped: `spec-clarify` writes the Work breakdown. |
 | Baseline | The toolkit's content is reconciled from `waste-organisations` main, frontend pull request 121 and smoke-tests pull request 3. Author, 18 November 2026: the two pull requests hold what the team wants in those repos. |
+| Rules outside skills | The rules apply to every change, not only when a skill runs. The thin `AGENTS.md` points at the installed rules; it does not carry a summary of them. Author, 18 November 2026, preferred over an always-on summary in each repo, which would bring back duplication and drift. |
 | Pull request template | Stays in each repo: its checklist is specific to the repo. 18 November 2026. |
 | Spec file names | `NNNN-<slug>.md` in this repo, without a ticket id. Author, 18 November 2026. |
 | Codex skills folder | Codex loads user skills from `~/.agents/skills/` and follows symlinked skill folders; `$CODEX_HOME/skills` is deprecated. `install.sh` clones to `${XDG_DATA_HOME:-$HOME/.local/share}/waste-manage-account-ai-toolkit` and links each `skills/<name>` into `~/.agents/skills/<name>`. Codex docs, 18 November 2026. |

@@ -165,7 +165,8 @@ it needs a decision.
 2. Make the edits per finding.
 3. **Verify with the repo's own gate** before committing: confirm each item in
    `Gate prerequisites`, unless it is `none`, then run `Gate commands` in order. Confirm coverage has not dropped below its previous figure, not just above
-   90% (`rules/shared/quality-assurance.md`). If a fix fails the gate, revert that
+   the stack rule's figure (`rules/stack/<Stack rule>.md` `## Coverage`,
+   `rules/shared/quality-assurance.md`). If a fix fails the gate, revert that
    edit and report the finding as unfixed, with what you tried.
 4. Commit as a **new commit** with the `commit` skill (note in the
    body that it was caught in self-review). Plain `git push` to the PR's

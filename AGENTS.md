@@ -13,6 +13,7 @@ templates/settings.json      the consuming repo's `.claude/settings.json`
 .claude-plugin/              plugin.json and marketplace.json, for Claude Code
 install.sh                   installer for Codex
 AGENTS.md, verify.sh         this repo's own rules and gate
+tests/*.bats                 bats tests for the shell scripts
 ```
 
 ## Specs
@@ -27,4 +28,4 @@ AGENTS.md, verify.sh         this repo's own rules and gate
 
 ## Verification gate
 
-Run `./verify.sh` before every commit and every pull request. It is the one command that checks the toolkit's own files, and it prints `PASS` when every check passes.
+Run `./verify.sh` before every commit and every pull request. It is the one command that checks the toolkit's own files, and it prints `PASS` when every check passes. When a shell script changes, run `bats tests/` as well.

@@ -1,0 +1,15 @@
+{
+  "$schema": "https://anthropic.com/claude-code/marketplace.schema.json",
+  "name": "waste-manage-account-ai-toolkit",
+  "description": "Catalogue of the Manage Account AI toolkit plugin",
+  "owner": {
+    "name": "Ogonna Iwunze"
+  },
+  "plugins": [
+    {
+      "name": "wma-ai-toolkit",
+      "description": "Shared AI-assisted development skills and rules for the Manage Account repos",
+      "source": "./"
+    }
+  ]
+}

@@ -25,3 +25,13 @@ setup() {
   [[ $output == "Usage: install.sh"* ]]
   [ ! -e "$HOME/.agents" ]
 }
+
+@test "install.sh refuses to replace a real skill folder" {
+  mkdir -p "$HOME/.agents/skills/commit"
+
+  run "$INSTALL" --dir "$TOOLKIT"
+
+  [ "$status" -eq 1 ]
+  [[ $output == *".agents/skills/commit is not a symlink"* ]]
+  [ ! -e "$HOME/.agents/skills/commit/commit" ]
+}

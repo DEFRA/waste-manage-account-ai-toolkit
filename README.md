@@ -8,12 +8,15 @@ design is in [specs/0001-centralise-ai-skills-and-rules.md](specs/0001-centralis
 ## Install for Claude Code
 
 A repo onboarded with `templates/settings.json` prompts you to install the plugin when you open
-it. To install it by hand, run these in Claude Code:
+it. To install it by hand, run this in a terminal, not inside a Claude Code session:
 
-```text
-/plugin marketplace add ogonna-ee/waste-manage-account-ai-toolkit
-/plugin install wma-ai-toolkit@waste-manage-account-ai-toolkit
+```bash
+claude plugin install wma-ai-toolkit --marketplace ogonna-ee/waste-manage-account-ai-toolkit
 ```
+
+It adds this repo as a marketplace if it is not one already, and installs the plugin for your
+user, with no dialog. Start a new Claude Code session afterwards. The `/plugin` commands inside
+a session do the same through a dialog.
 
 Claude Code then takes updates from this repo. The skills run as `/wma-ai-toolkit:<skill>`, for
 example `/wma-ai-toolkit:commit`.

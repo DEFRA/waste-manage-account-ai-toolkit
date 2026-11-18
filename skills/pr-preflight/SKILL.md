@@ -3,12 +3,13 @@ name: pr-preflight
 description: >
   Pre-flight check of your own GitHub pull request in this repository before requesting human
   review. Reviews the PR with the same per-PR-scoped lenses as pr-review (security, quality,
-  redundancy, testing, api-contract, data, architecture, dependencies, PR hygiene) against the
-  linked Jira story, its spec and the repo's standards (AGENTS.md and rules/shared/), maps the
-  acceptance criteria to evidence, states what it reviewed in full, then fixes the mechanical
-  in-spec blocking findings it is confident about (verified with the repo's full gate, committed
-  as a new commit, plain-pushed to the PR's own branch) and reports a checklist of what was fixed
-  and what still needs manual attention. Never posts any comment, review, or approval to GitHub.
+  redundancy, testing, dependencies, PR hygiene, spec, then the stack rule's and the Repo
+  profile's Review lenses) against the linked Jira story, its spec and the repo's standards
+  (AGENTS.md, rules/shared/ and the stack rule), maps the acceptance criteria to evidence, states
+  what it reviewed in full, then fixes the mechanical in-spec blocking findings it is confident
+  about (verified with the repo's full gate, committed as a new commit, plain-pushed to the PR's
+  own branch) and reports a checklist of what was fixed and what still needs manual attention.
+  Never posts any comment, review, or approval to GitHub.
   Use whenever asked to self-review, pre-review, or check a PR of your own before review, for
   example "review my PR", "is my PR ready", "preflight PR #12", "check my pull request before I
   ask for review". For reviewing someone else's PR, use pr-review instead.
@@ -44,10 +45,13 @@ Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names
 Read the `## Repo profile` table in the consuming repo's `AGENTS.md` before
 anything else, and take these entries from it:
 
+- `Stack rule`: the stack rule under `rules/stack/` that applies to this repo.
 - `Gate commands`: the repo's full gate, run in order to verify a fix.
+- `Gate prerequisites`: what must be running or free before the gate.
 - `Frozen artefacts`: the paths a fix must never change.
 - `Specs folder` and `Spec file naming`: where the PR's spec lives.
 - `Pull request template`: the description the PR must follow.
+- `Review lenses`: the lenses this repo adds beyond the stack rule's.
 
 When the table or one of these entries is absent, stop and report
 `Repo profile: missing <entry>`. Never guess a command or a path.
@@ -63,7 +67,7 @@ When the table or one of these entries is absent, stop and report
   reactions, or label, title or description edits. Pushing a fix commit to your
   own head branch is the sole permitted write.
 - **Stay in spec.** The spec is: the linked Jira story's acceptance criteria and
-  its `specs/` file, plus this repo's standards applied to the lines the PR
+  its spec file in `Specs folder`, plus this repo's standards applied to the lines the PR
   touches. Never fix or add anything beyond that; a valuable out-of-scope idea
   becomes a suggested new Jira story in the report, never a change on this
   branch.
@@ -90,7 +94,7 @@ When the table or one of these entries is absent, stop and report
 1. **Resolve the PR and confirm authorship** (ground rules above). Fetch
    metadata, diff, and CI status with `gh pr view`, `gh pr diff`,
    `gh pr checks`. Count the generated files (artefacts matched by
-   `Frozen artefacts`, `Snapshots/` folders, lock files, anything marked
+   `Frozen artefacts`, lock files, anything marked
    `linguist-generated` in `.gitattributes`) and the non-generated changed lines, and compare with the
    size guide in `rules/shared/git-workflow.md`. An over-budget PR is a blocking
    PR hygiene finding that needs a manual split; do not try to fix it.
@@ -104,7 +108,7 @@ When the table or one of these entries is absent, stop and report
    review directly, naming the applicable lens(es), and skip the acceptance
    criteria table.
 4. **Apply the review lenses** exactly as defined in the `pr-review` skill: same
-   lens table, same `rules/shared/` references, same scoping rules (record skipped
+   lens table, same `rules/shared/` and `rules/stack/<Stack rule>.md` references, same scoping rules (record skipped
    lenses with a reason; when unsure, include the lens). Since this is a
    pre-flight before a human reviews, err toward including a lens on close
    calls: cheaper to catch it now.
@@ -159,8 +163,8 @@ it needs a decision.
 1. Get onto the PR's head branch at its current head (check out or use a
    worktree; stash unrelated local changes first and restore them after).
 2. Make the edits per finding.
-3. **Verify with the repo's own gate** before committing: run `Gate commands`
-   in order. Confirm coverage has not dropped below its previous figure, not just above
+3. **Verify with the repo's own gate** before committing: confirm each item in
+   `Gate prerequisites`, unless it is `none`, then run `Gate commands` in order. Confirm coverage has not dropped below its previous figure, not just above
    90% (`rules/shared/quality-assurance.md`). If a fix fails the gate, revert that
    edit and report the finding as unfixed, with what you tried.
 4. Commit as a **new commit** with the `commit` skill (note in the
@@ -173,7 +177,7 @@ it needs a decision.
 ```
 ### PR <number>: <title>  (preflight)
 <base> → <head>  •  <files> files (+<adds>/−<dels>, <n> generated)  •  CI: <passing/failing>
-Spec: <ticket id and specs/NNNN-… file | "no Jira story — <reason>" | "no Jira link — add one before requesting review">
+Spec: <ticket id and the spec file in `Specs folder` | "no Jira story — <reason>" | "no Jira link — add one before requesting review">
 Size: <within budget | over budget: <n> non-generated lines — split at <boundary> before requesting review>
 Reviewed: <n> of <m> files in full  (skimmed: <files — reason>; not reviewed: <generated snapshots, lock files>)
 Lenses: <applied>  (scoped out: <lens — reason>)

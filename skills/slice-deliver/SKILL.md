@@ -186,8 +186,8 @@ run `wait 14400` that way instead of looping. Stay quiet while waiting. Then run
   failure and asked to carry on. With no blocker, call `run` once: it resumes ralph at the failed
   phase, or continues the open items. Then wait as in stage 2.
 
-Stop without running anything, and say why, when the log shows one of the cases `AGENTS.md`
-reserves for a human: a failure that would need a change to a path matched by
+Stop without running anything, and say why, when the log shows one of the cases this skill
+reserves for the developer: a failure that would need a change to a path matched by
 `Frozen artefacts`, a delivered spec that would need editing, or an acceptance criterion that
 cannot be met without a decision.
 
@@ -299,7 +299,7 @@ PR: <pr_url>
 
 Message for the team:
 > <PR title> is ready for review: <pr_url>
-> <One sentence on what it does.> About <n> changed lines without snapshots, <files> files<, slice n of m of <spec file name>>.
+> <One sentence on what it does.> About <n> changed lines excluding `Frozen artefacts`, <files> files<, slice n of m of <spec file name>>.
 > Review focus: <the two or three places pr-preflight named>.
 ```
 

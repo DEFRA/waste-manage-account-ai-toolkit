@@ -2,8 +2,8 @@
 
 The shared AI-assisted development skills and rules for the Manage Account repos. Claude Code
 installs it as the `wma-ai-toolkit` plugin; Codex installs it with `install.sh`. Each consuming
-repo keeps only a thin `AGENTS.md` with its Repo profile. The design is in
-[specs/0001-centralise-ai-skills-and-rules.md](specs/0001-centralise-ai-skills-and-rules.md).
+repo keeps only a thin `AGENTS.md`, with its Repo profile, and a `.claude/settings.json`. The
+design is in [specs/0001-centralise-ai-skills-and-rules.md](specs/0001-centralise-ai-skills-and-rules.md).
 
 ## Install for Claude Code
 

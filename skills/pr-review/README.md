@@ -55,6 +55,6 @@ trust first.
 ## Afterwards
 
 - Read the files it skimmed and the places named under "Human review focus".
-- Post findings to GitHub yourself, in your own words, following the review comments guidance.
+- Post findings to GitHub yourself, in your own words.
 - If you want the agent to post specific findings, say so explicitly; it posts only what you
   approve.

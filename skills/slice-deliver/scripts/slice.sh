@@ -243,6 +243,7 @@ load_facts() {
     local spec_arg=$1 slice_arg=$2 slice_facts
     specs_folder=$(profile_value "Specs folder")
     specs_folder=${specs_folder%/}
+    specs_folder=${specs_folder#./}
     spec_file_naming=$(profile_value "Spec file naming")
     gate_prerequisites=$(profile_value "Gate prerequisites")
     spec_file=$(resolve_spec "$spec_arg")

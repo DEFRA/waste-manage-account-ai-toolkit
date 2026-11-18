@@ -45,7 +45,11 @@ shopt -s nullglob
 skill_count=0
 for skill_dir in "$TOOLKIT_DIR"/skills/*/; do
   skill_dir="${skill_dir%/}"
-  ln -sfn "$skill_dir" "$CODEX_SKILLS_DIR/$(basename "$skill_dir")"
+  skill_link="$CODEX_SKILLS_DIR/$(basename "$skill_dir")"
+  if [[ -e "$skill_link" && ! -L "$skill_link" ]]; then
+    fail "$skill_link is not a symlink; remove it and run install.sh again"
+  fi
+  ln -sfn "$skill_dir" "$skill_link"
   skill_count=$((skill_count + 1))
 done
 

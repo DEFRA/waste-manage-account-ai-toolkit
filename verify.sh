@@ -98,7 +98,7 @@ check_shared_rules_are_stack_free() {
   [[ -d rules/shared ]] || return 0
   local token
   for token in "${STACK_TOKENS[@]}"; do
-    if grep -rnw -- "$token" rules/shared/; then
+    if grep -rnF -- "$token" rules/shared/; then
       fail "rules/shared/ contains the stack token '$token'"
     fi
   done

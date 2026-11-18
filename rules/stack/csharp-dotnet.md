@@ -78,6 +78,17 @@ See [quality-assurance.md](../shared/quality-assurance.md) for the shared test r
 - Framework and libraries: xUnit v3, AwesomeAssertions, NSubstitute for doubles, AutoFixture for data, Verify for snapshots, `Microsoft.Extensions.TimeProvider.Testing` for time.
 - Name tests by behaviour: `Method_Scenario_ShouldExpectation` (`ToEntity_WithBlankAndAbsentRegion_ShouldGiveOneAddress`). A test name reads as a statement about the service.
 
+## Acceptance criteria defaults
+
+Start from the default criteria in [quality-assurance.md](../shared/quality-assurance.md) and make these API criteria specific to the story:
+
+- Invalid or missing input returns `400` with each error keyed by its JSON path.
+- A caller without valid credentials gets `401`; a caller without the endpoint's scope gets `403`.
+- A request that breaks the version rules gets `405` or `406`.
+- Concurrent requests for the same record give the result the spec states.
+- What is stored, and what is not, is checked against the stored data.
+- No v1 test changes.
+
 ## Review lenses
 
 | Lens         | Check for                                                                                                                  | Rules to apply |

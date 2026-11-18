@@ -46,6 +46,20 @@ See [quality-assurance.md](../shared/quality-assurance.md) for the shared test r
 - A service's unit tests use Vitest with coverage through `@vitest/coverage-v8`. A suite of checks against a running service uses Mocha with `node:assert/strict`.
 - No `it.only` or `describe.only` is committed.
 
+## Acceptance criteria defaults
+
+Start from the default criteria in [quality-assurance.md](../shared/quality-assurance.md) and, for a web service, make these criteria specific to the story:
+
+- Screens and content match the prototype or wireframe.
+- Pages use GOV.UK Design System components (govuk-frontend), never hand-rolled ones.
+- Pages meet WCAG 2.2 AA in all supported browsers, including mobile.
+- Every field is validated on the server, with the GOV.UK error message and error summary patterns.
+- The journey works without client-side JavaScript and without CSS.
+- Invalid or missing input shows which message, and which field the error summary links to.
+- An unauthenticated user is redirected to sign-in and back to the requested page afterwards.
+- An unauthorised user sees the 403 page.
+- Session expiry mid-journey and a failing back-end call each give the result the spec states.
+
 ## Review lenses
 
 None beyond the core lenses. A lens that only one repo needs, such as the frontend's `accessibility`, is repo-only and lives in that repo's Repo profile `Review lenses`.

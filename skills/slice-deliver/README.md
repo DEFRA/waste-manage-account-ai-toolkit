@@ -54,8 +54,8 @@ To skip the branch question, say it in the request: "... from main", "... on top
 ## What happens
 
 1. **Checks and branch.** Nothing is changed until the spec, the slice, `gh`, the `Gate
-   prerequisites` and the agent login are all in order. It then asks where the branch starts, if that is a real
-   choice, and makes the slice's branch.
+   prerequisites` and the agent login are all in order. It then asks where the branch starts,
+   if that is a real choice, and makes the slice's branch.
 2. **Build.** `ralph auto` plans the slice, builds it one plan item per commit, reviews the result
    and fixes what the review found. It runs detached and logs to `.ralph/slice-deliver/ralph.log`;
    expect an hour or more.

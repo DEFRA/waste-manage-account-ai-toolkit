@@ -24,7 +24,7 @@
 ## AI toolkit
 
 This repo requires the Manage Account AI toolkit,
-`ogonna-ee/waste-manage-account-ai-toolkit`. It provides these skills:
+`DEFRA/waste-manage-account-ai-toolkit`. It provides these skills:
 
 | Skill | Claude Code | Codex |
 |---|---|---|

@@ -50,9 +50,7 @@ when it changes, and a new repo onboarded by adding two small files.
 
 ### This repo is the single source
 
-`ogonna-ee/waste-manage-account-ai-toolkit`, public, holds the toolkit while it is a proof of
-concept. It moves to the DEFRA organisation once the Manage Account engineers adopt it (see
-Decisions). It holds:
+`DEFRA/waste-manage-account-ai-toolkit`, public, holds:
 
 ```
 skills/<name>/SKILL.md       the skills, in the open Agent Skills format
@@ -140,7 +138,7 @@ bad change can be reverted in one place.
 
 Five pull requests: two in this repo, then one in each consuming repo. Slices 1 and 2 are the
 proof of concept. The author then presents it to the Manage Account engineers; slices 3 to 5
-follow adoption and the repo's move to DEFRA.
+follow adoption.
 
 | Slice | Repo | Work | Verified by |
 |---|---|---|---|
@@ -176,8 +174,8 @@ follow adoption and the repo's move to DEFRA.
 |---|---|
 | Tools | Claude Code and Codex only, for now. Author, 18 November 2026, narrowing the same day's first answer, which also named GitHub Copilot and Cursor. |
 | Update model | Local install from a central source, with no pull request in the consuming repos. Author, 18 November 2026, preferred over a sync job that opens a pull request per repo. |
-| Home | `ogonna-ee/waste-manage-account-ai-toolkit`, public, created on 18 November 2026 as a proof of concept. Ogonna moves it to the DEFRA organisation after presenting it to the Manage Account engineers and once they adopt it. Author, 18 November 2026. |
-| Owner | Ogonna owns the repo and approves changes to it during the proof of concept. Author, 18 November 2026. Ownership after the move is agreed at adoption. |
+| Home | `DEFRA/waste-manage-account-ai-toolkit`, public. The toolkit began on 18 November 2026 as a proof of concept in `ogonna-ee/waste-manage-account-ai-toolkit`, with the move to DEFRA planned for after adoption. The author created the DEFRA repo and moved the toolkit there the same day, ahead of that plan, so every reference names the final owner. |
+| Owner | Ogonna owns the repo and approves changes to it during the proof of concept. Author, 18 November 2026. Ownership within the DEFRA organisation is agreed at adoption. |
 | Local development only | No cloud or CI agent is used on the consuming repos, and the toolkit does not support one. Author, 18 November 2026. |
 | `AGENTS.md` | Stays in each repo in a thin form, because no tool-neutral local install delivers always-on rules. 18 November 2026. |
 | Skill set | `commit`, `pr-preflight`, `pr-review`, `slice-deliver` and `spec-clarify` in every repo. Author, 18 November 2026. `spec-breakdown` is therefore dropped: `spec-clarify` writes the Work breakdown. |
@@ -203,7 +201,7 @@ answered by the author on 18 November 2026 and are recorded in Decisions.
 ## Dependencies
 
 - `DEFRA/waste-manage-account-frontend` pull request 121 and `DEFRA/waste-organisations-smoke-tests` pull request 3, both open on 18 November 2026, are the baseline for those repos. They merge before slice 2 reconciles the copies, and slices 4 and 5 then remove what they added. If either changes before it merges, slice 2 uses the merged version.
-- Slices 3 to 5 wait for adoption by the Manage Account engineers and the repo's move to the DEFRA organisation. Each consuming repo's `.claude/settings.json` and `install.sh` name the repo's owner, so migrating after the move means the consuming repos name the final owner from the start. Slices 1 and 2 do not depend on either.
+- Slices 3 to 5 wait for adoption by the Manage Account engineers. Slices 1 and 2 do not. The repo is already in the DEFRA organisation, so the consuming repos name its final owner from the start.
 - The ralph loop that `slice-deliver` drives must be available on the developer's machine, as it is today.
 
 ## Risks

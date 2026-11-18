@@ -3,7 +3,7 @@
     "waste-manage-account-ai-toolkit": {
       "source": {
         "source": "github",
-        "repo": "ogonna-ee/waste-manage-account-ai-toolkit"
+        "repo": "DEFRA/waste-manage-account-ai-toolkit"
       },
       "autoUpdate": true
     }

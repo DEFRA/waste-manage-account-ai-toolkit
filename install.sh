@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-TOOLKIT_REPO="https://github.com/ogonna-ee/waste-manage-account-ai-toolkit.git"
+TOOLKIT_REPO="https://github.com/DEFRA/waste-manage-account-ai-toolkit.git"
 TOOLKIT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/waste-manage-account-ai-toolkit"
 CODEX_SKILLS_DIR="$HOME/.agents/skills"
 

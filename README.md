@@ -11,7 +11,7 @@ A repo onboarded with `templates/settings.json` prompts you to install the plugi
 it. To install it by hand, run this in a terminal, not inside a Claude Code session:
 
 ```bash
-claude plugin install wma-ai-toolkit --marketplace ogonna-ee/waste-manage-account-ai-toolkit
+claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit
 ```
 
 It adds this repo as a marketplace if it is not one already, and installs the plugin for your
@@ -24,7 +24,7 @@ example `/wma-ai-toolkit:commit`.
 ## Install for Codex
 
 ```bash
-curl -fsSLO https://raw.githubusercontent.com/ogonna-ee/waste-manage-account-ai-toolkit/main/install.sh
+curl -fsSLO https://raw.githubusercontent.com/DEFRA/waste-manage-account-ai-toolkit/main/install.sh
 bash install.sh
 ```
 

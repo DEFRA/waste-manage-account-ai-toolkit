@@ -100,9 +100,8 @@ If your tool sandboxes commands, `slice.sh run`, the gate and `gh` need escalati
 
 ## The script
 
-`SKILL_DIR` is the folder that holds this `SKILL.md`, resolved with `readlink -f` so that a
-symlinked install finds the script. Run the script from the repository root with
-`bash "$SKILL_DIR/scripts/slice.sh"`:
+Run the script from the repository root with `bash "$SKILL_DIR/scripts/slice.sh"`, with
+`SKILL_DIR` from `## Toolkit root`:
 
 | Command | What it does |
 |---|---|

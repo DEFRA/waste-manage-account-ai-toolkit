@@ -62,10 +62,11 @@ Indicate breaking changes (MAJOR version bump) using either:
 7. **Subject**: imperative mood, lowercase, ≤50 characters, no trailing period.
 8. **Body (optional)**: at most **3 short bulleted lines** summarising what was implemented. Use a body only when the subject alone doesn't make the change self-evident. Skip the body entirely for trivial or self-describing diffs.
 9. **Single-commit pull request**: a pull request with one commit is squash-merged under that commit's subject, so when the branch will have only this commit, use the pull request title form instead: `<ticket-id>: Summary`.
-10. **Never stage loop or local artefacts**: `IMPLEMENTATION_PLAN.md`, `PROGRESS.md`, `PROMPT_*.md`, `.ralph/`, and the artefacts the Repo profile entry `Frozen artefacts` names as generated. They are gitignored; if one shows as tracked, stop and ask.
+10. **Never stage loop or local artefacts**: `IMPLEMENTATION_PLAN.md`, `PROGRESS.md`, `PROMPT_*.md`, `.ralph/`, and any other path the repository's `.gitignore` matches. They are gitignored; if one shows as tracked, stop and ask.
 11. **Commit immediately**: do not seek approval before committing. The user invoked this skill *because* they want a commit.
-12. **Read the Repo profile**: read the `## Repo profile` section in the consuming repo's `AGENTS.md` before staging. When it is absent, stop and report `Repo profile: missing`.
+12. **Read the Repo profile**: read the `## Repo profile` section in the consuming repo's `AGENTS.md` before staging. When it is absent, stop and report `Repo profile: missing`. When it has no `Frozen artefacts` entry, stop and report `Repo profile: missing Frozen artefacts`.
 13. **Respect the hook**: when the repo has a pre-commit hook, it runs the gate. If it fails, fix the cause and commit again; never pass `--no-verify`.
+14. **Leave frozen artefacts alone**: stage a path matched by the Repo profile entry `Frozen artefacts` only when the spec names the change. Otherwise stop and ask the developer.
 
 ## Quality Standards
 

@@ -59,9 +59,17 @@ skills/<name>/SKILL.md       the skills, in the open Agent Skills format
 rules/shared/*.md            the six shared rules
 rules/stack/*.md             csharp-dotnet.md, javascript-nodejs.md
 templates/AGENTS.md          the thin per-repo file (see below)
+templates/settings.json      the consuming repo's `.claude/settings.json` (see below)
 .claude-plugin/              plugin.json and marketplace.json, for Claude Code (see below)
 install.sh                   installer for Codex
+AGENTS.md, verify.sh         this repo's own rules and gate (see `specs/0002-toolkit-verification-gate.md`)
 ```
+
+The plugin root is the repo root, so the rules ship inside the plugin. A skill finds the toolkit
+root as the folder two levels above its own `SKILL.md`, resolved with `readlink -f` so the Codex
+symlink lands in the clone. It reads `rules/shared/<name>.md` and `rules/stack/<name>.md` from
+there. A skill names the script next to it, `scripts/slice.sh`, by that same resolved folder,
+never by a path in the consuming repo.
 
 The skill set is `commit`, `spec-clarify`, `slice-deliver`, `pr-review` and `pr-preflight`.
 `spec-breakdown` is not carried over: `spec-clarify` now writes the Work breakdown.
@@ -85,17 +93,26 @@ consuming repo.
 
 ### Skills read a repo profile
 
-No skill names a repo's commands, test projects or folders. Each reads them from a "Repo profile"
-section in the consuming repo's `AGENTS.md`:
+No skill names a repo's commands, test projects or folders. Each reads them from a `## Repo profile`
+section in the consuming repo's `AGENTS.md`. The section is one Markdown table with the columns
+`Entry` and `Value`. The entry names are fixed; a skill matches them exactly:
 
-| Profile entry | Example (`waste-organisations`) |
+| Entry | Value (example, `waste-organisations`) |
 |---|---|
 | Stack rule | `csharp-dotnet` |
-| Gate commands, in order | CSharpier check, build, `Api.Tests`, `Api.IntegrationTests`, `Api.V1.Tests` |
-| Test projects and what each proves | `Api.Tests`: unit; `Api.V1.Tests`: frozen v1 behaviour |
-| Specs folder and file naming | `specs/`, `NNNN-<ticket-id>-slug.md` |
-| Frozen artefacts | v1 tests, `*.verified.*` snapshots |
+| Gate commands | the commands in order, one per line in the cell, separated by `<br>` |
+| Gate prerequisites | `Docker running; host port 5432 free` (`none` when there are none) |
+| Test projects | `Api.Tests: unit; Api.IntegrationTests: against Compose; Api.V1.Tests: frozen v1 behaviour` |
+| Specs folder | `specs/` |
+| Spec file naming | `NNNN-<ticket-id>-slug.md` |
+| Frozen artefacts | `tests/Api.V1.Tests/**, *.verified.*` (`none` when there are none) |
 | Pull request template | `.github/PULL_REQUEST_TEMPLATE.md` |
+| Review lenses | extra lenses for this repo beyond the stack rule's, or `none` |
+
+`Gate commands` and `Gate prerequisites` cover what the repo's old `AGENTS.md` said under
+"Local Build And Test Checks" and "Postgres And Liquibase". The stack rule carries the review
+lenses that every repo on that stack shares, under a `## Review lenses` heading, so `pr-review`
+and `pr-preflight` apply the core lenses, then the stack rule's, then the profile's.
 
 A skill stops and reports when the profile lacks an entry it needs.
 
@@ -167,11 +184,18 @@ follow adoption and the repo's move to DEFRA.
 | Baseline | The toolkit's content is reconciled from `waste-organisations` main, frontend pull request 121 and smoke-tests pull request 3. Author, 18 November 2026: the two pull requests hold what the team wants in those repos. |
 | Pull request template | Stays in each repo: its checklist is specific to the repo. 18 November 2026. |
 | Spec file names | `NNNN-<slug>.md` in this repo, without a ticket id. Author, 18 November 2026. |
+| Codex skills folder | Codex loads user skills from `~/.agents/skills/` and follows symlinked skill folders; `$CODEX_HOME/skills` is deprecated. `install.sh` clones to `${XDG_DATA_HOME:-$HOME/.local/share}/waste-manage-account-ai-toolkit` and links each `skills/<name>` into `~/.agents/skills/<name>`. Codex docs, 18 November 2026. |
+| Plugin skill names | Claude Code exposes a plugin skill as `/<plugin>:<skill>`; the bare `/<skill>` also resolves unless another command uses the name. The plugin is named `wma-ai-toolkit` and the marketplace `waste-manage-account-ai-toolkit`, so the install key is `wma-ai-toolkit@waste-manage-account-ai-toolkit`. The thin `AGENTS.md` names skills by the namespaced form. Claude Code docs, 18 November 2026. |
+| Plugin updates | `plugin.json` sets no `version`, so Claude Code tracks the repo's commit; `templates/settings.json` sets `autoUpdate` to `true` on the marketplace entry. Releases are still tagged for revert. 18 November 2026. |
+| Repo profile format | One `## Repo profile` table with fixed entry names, as listed under "Skills read a repo profile". Stack-wide review lenses live in the stack rule; repo-only lenses in the profile. 18 November 2026. |
+| Stack review lenses | `csharp-dotnet.md` carries `api-contract`, `data` and `architecture`. `javascript-nodejs.md` carries none: the frontend's `accessibility` and Hapi `architecture` lenses are repo-only and go in that repo's profile `Review lenses` in slice 4. Planning pass, 18 November 2026. |
+| Toolkit root in a skill | Every `SKILL.md` has a `## Toolkit root` section that resolves `TOOLKIT_ROOT` as two folders above the file with `readlink -f`, and reads `rules/` under it. Planning pass, 18 November 2026. |
+| Baseline refs | The two baseline pull requests are read as `origin/pr-121` in `waste-manage-account-frontend` and `origin/pr-3` in `waste-organisations-smoke-tests`, fetched on 18 November 2026 into the sibling checkouts under `../`. |
 
 ## Open Questions
 
-1. Does Codex load skills from a user-level folder in its current version, and which folder? Slice 1 answers this.
-2. Claude Code namespaces plugin skills (`<plugin>:commit`). Do references such as "use the `commit` skill" in a thin `AGENTS.md` still resolve? Slice 1 answers this.
+None open. Questions 1 and 2 were answered on 18 November 2026 from the Codex and Claude Code
+documentation and are recorded in Decisions ("Codex skills folder" and "Plugin skill names").
 
 Questions 3 to 5 of the first draft (cloud and CI agents, ownership, the move to DEFRA) were
 answered by the author on 18 November 2026 and are recorded in Decisions.

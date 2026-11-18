@@ -134,6 +134,17 @@ has_line() {
   has_line "spec_file=specs/003-y.md"
 }
 
+@test "a spec number resolves a spec in a ./ Specs folder" {
+  write_profile '| Specs folder | `./specs/` |'
+  write_spec specs/0008-x.md
+  commit_fixture
+
+  run "$SLICE" status 8 1
+
+  [ "$status" -eq 0 ]
+  has_line "spec_file=specs/0008-x.md"
+}
+
 @test "a spec number matching two specs is refused" {
   write_profile '| Specs folder | `specs/` |'
   write_spec specs/0004-x.md

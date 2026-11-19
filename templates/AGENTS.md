@@ -26,19 +26,15 @@ deviations from a shared or stack rule. The ones that matter most:
 
 ## AI toolkit
 
-This repo requires the Manage Account AI toolkit, `DEFRA/waste-manage-account-ai-toolkit`. The
-skills and the shared rules live there, not in this repo. Before any task, find the toolkit folder
-and read `shared-instructions.md` in it. Follow it as if it were part of this file.
+This repo follows the Manage Account AI toolkit, `DEFRA/waste-manage-account-ai-toolkit`. The
+skills and the shared rules live there, not in this repo. Its `shared-instructions.md` applies to
+every task:
 
-The toolkit folder is:
+- **Claude Code:** the plugin loads it at the start of the session.
+- **Codex:** read `~/.wma-ai-toolkit/shared-instructions.md` before any task.
 
-- **Claude Code:** the `installPath` of `wma-ai-toolkit@waste-manage-account-ai-toolkit` in
-  `~/.claude/plugins/installed_plugins.json`.
-- **Codex:** two levels above the target of the `~/.agents/skills/commit` symlink
-  (`readlink -f ~/.agents/skills/commit`).
-
-If the folder cannot be found, or a toolkit skill is not available, stop and tell the developer to
-install the toolkit:
+If it is neither in your context nor at that path, or a toolkit skill is not available, stop and
+ask the developer to install the toolkit:
 
 - **Claude Code:** run `claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit`
   in a terminal, then start a new session.

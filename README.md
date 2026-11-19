@@ -32,14 +32,16 @@ bash install.sh
 
 `install.sh` clones the toolkit to
 `${XDG_DATA_HOME:-$HOME/.local/share}/waste-manage-account-ai-toolkit` and links each skill into
-`~/.agents/skills`. Run `bash install.sh` again to update. The skills run as `$<skill>`, for
+`~/.agents/skills`, and links the toolkit itself at `~/.wma-ai-toolkit`, the fixed path a repo's
+`AGENTS.md` gives Codex for `shared-instructions.md`. Run `bash install.sh` again to update. The skills run as `$<skill>`, for
 example `$commit`.
 
 ## Onboard a repo
 
 1. Copy [templates/AGENTS.md](templates/AGENTS.md) to the repo's `AGENTS.md` and fill in its
-   description, its Repo profile and its few most important constraints. It stays thin: it sends
-   the tool to [shared-instructions.md](shared-instructions.md) in the toolkit for the skills and the rules.
+   description, its Repo profile and its few most important constraints. It stays thin: the
+   skills and the rules come from [shared-instructions.md](shared-instructions.md) in the toolkit,
+   which the plugin loads in Claude Code and Codex reads at `~/.wma-ai-toolkit`.
 2. Copy [templates/constraints.md](templates/constraints.md) to the repo's `doc/constraints.md`
    and fill in the rules that exist only in that repo.
 3. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,

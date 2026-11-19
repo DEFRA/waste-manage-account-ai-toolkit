@@ -28,7 +28,7 @@ deviations from a shared or stack rule. The ones that matter most:
 
 This repo requires the Manage Account AI toolkit, `DEFRA/waste-manage-account-ai-toolkit`. The
 skills and the shared rules live there, not in this repo. Before any task, find the toolkit folder
-and read `AGENTS.shared.md` in it. Follow it as if it were part of this file.
+and read `shared-instructions.md` in it. Follow it as if it were part of this file.
 
 The toolkit folder is:
 

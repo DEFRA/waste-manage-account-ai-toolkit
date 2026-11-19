@@ -4,7 +4,7 @@ The shared AI-assisted development skills and rules for the Manage Account repos
 installs it as the `wma-ai-toolkit` plugin; Codex installs it with `install.sh`. Each consuming
 repo keeps a thin `AGENTS.md`, with its Repo profile, a `doc/constraints.md` with its repo-only
 rules, and a `.claude/settings.json`. Its `AGENTS.md` sends the tool to
-[AGENTS.shared.md](AGENTS.shared.md) here for the skills and the shared rules. The
+[shared-instructions.md](shared-instructions.md) here for the skills and the shared rules. The
 design is in [specs/0001-centralise-ai-skills-and-rules.md](specs/0001-centralise-ai-skills-and-rules.md).
 
 ## Install for Claude Code
@@ -39,7 +39,7 @@ example `$commit`.
 
 1. Copy [templates/AGENTS.md](templates/AGENTS.md) to the repo's `AGENTS.md` and fill in its
    description, its Repo profile and its few most important constraints. It stays thin: it sends
-   the tool to [AGENTS.shared.md](AGENTS.shared.md) in the toolkit for the skills and the rules.
+   the tool to [shared-instructions.md](shared-instructions.md) in the toolkit for the skills and the rules.
 2. Copy [templates/constraints.md](templates/constraints.md) to the repo's `doc/constraints.md`
    and fill in the rules that exist only in that repo.
 3. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,

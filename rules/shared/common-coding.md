@@ -17,6 +17,8 @@ Shared by the Manage Account repos from the DEFRA [common coding standards](http
 - All code is reviewed by another developer before merge.
 - All repos are connected to SonarQube Cloud and the Defra standard quality gate is met.
 - All code is checked for security and dependency vulnerabilities: no out-of-date dependencies or libraries with known vulnerabilities.
+- Never relax a formatter, linter or analyser setting, or suppress one of its warnings, to get a build green. A suppression that is justified carries a comment saying why.
+- No `TODO` without a Jira reference.
 
 ## Readability
 

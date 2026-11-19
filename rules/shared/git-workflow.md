@@ -13,7 +13,7 @@ Shared by the Manage Account repos from the DEFRA [version control standards](ht
 
 Goals: focused PRs, simple reviews, a clean commit history, and respect for reviewers' time.
 
-1. **Always on a branch.** However small the change: `git checkout -b <ticket-id>-<slug>`, where `<ticket-id>` is the story's Jira key, whatever its project. A branch that delivers one slice of a spec ends with the slice: `<ticket-id>-<slug>-slice-<n>`. The DEFRA process uses a plain descriptive name; these repos prefix the Jira key so the PR title and story link can be derived from it. Dependabot branches are exempt. Work that is not associated with a Jira story takes no key: the branch has a short descriptive name and the PR title is the summary alone. Never invent a placeholder key.
+1. **Always on a branch.** However small the change: `git checkout -b <ticket-id>-<slug>`, where `<ticket-id>` is the story's Jira key, whatever its project. A branch that delivers one slice of a spec ends with the slice: `<ticket-id>-<slug>-slice-<n>`. The DEFRA process uses a plain descriptive name; these repos prefix the Jira key so the PR title and story link can be derived from it. Dependabot branches are exempt. Work that is not associated with a Jira story takes no key: the branch has a short descriptive name and the PR title is the summary alone. Never invent a placeholder key. Take the key from the spec, whose title and file name carry it; if the work has a story and you cannot find its key, ask rather than guess. Never write a Jira project prefix into a rule, a skill or a template.
 2. **Start with an empty commit** (`git commit --allow-empty`) using this template, so the PR is visible from the start:
 
    ```text
@@ -62,5 +62,5 @@ Source: [How to write a Git commit message](https://chris.beams.io/posts/git-com
 ## Ralph loop commits
 
 - The build loop commits with the `commit` skill after the full gate passes, one plan item per commit or per small set of atomic commits.
-- Loop artefacts (`IMPLEMENTATION_PLAN.md`, `PROGRESS.md`, `PROMPT_*.md`, `.ralph/`) are gitignored and never staged.
+- Loop artefacts (`IMPLEMENTATION_PLAN.md`, `PROGRESS.md`, `PROMPT_*.md`, `ralph.yaml`, `.ralph/`) are gitignored and never staged.
 - Merging to `main` is always a human's squash merge after review; the loop pushes to the story branch only.

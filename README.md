@@ -39,6 +39,11 @@ example `$commit`.
    Repo profile, constraints and description.
 2. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,
    so Claude Code prompts each developer to install the plugin.
+3. Copy [templates/CLAUDE.md](templates/CLAUDE.md) to the repo's `CLAUDE.md`, so Claude Code
+   reads `AGENTS.md`.
+4. Copy [templates/PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) to the repo's
+   `.github/PULL_REQUEST_TEMPLATE.md` and replace each `<...>` with what is particular to the repo.
+5. Add the lines of [templates/gitignore](templates/gitignore) to the repo's `.gitignore`.
 
 ## Change control
 

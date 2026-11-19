@@ -5,6 +5,8 @@ Shared by the Manage Account repos from the DEFRA [container standards](https://
 ## Standards
 
 - Bespoke software is delivered as Docker containers, built with Docker. Linux containers only.
+- Images extend the Defra parent images for the stack (`defradigital/<stack>` and its `-development` variant).
+- Containers never run as root: a container is not a trust boundary. A step that needs root switches back to the unprivileged user straight after.
 - Production images are **immutable**: once built they do not change, but they are configured. All per-environment behaviour comes from environment variables set by CDP, never from values baked into the image.
 - Images are **self-contained** and carry all runtime dependencies; add to an image only what it needs at run time.
 - Images are tagged and versioned by the CDP build action on merge to `main`.

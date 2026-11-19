@@ -26,13 +26,15 @@
 This repo requires the Manage Account AI toolkit,
 `DEFRA/waste-manage-account-ai-toolkit`. It provides these skills:
 
-| Skill | Claude Code | Codex |
-|---|---|---|
-| commit | `wma-ai-toolkit:commit` | `$commit` |
-| spec-clarify | `wma-ai-toolkit:spec-clarify` | `$spec-clarify` |
-| slice-deliver | `wma-ai-toolkit:slice-deliver` | `$slice-deliver` |
-| pr-review | `wma-ai-toolkit:pr-review` | `$pr-review` |
-| pr-preflight | `wma-ai-toolkit:pr-preflight` | `$pr-preflight` |
+| Skill | What it does | Claude Code | Codex |
+|---|---|---|---|
+| spec-clarify | Turns a Jira story, bug or idea into a spec with a Work breakdown; the first step of every story | `wma-ai-toolkit:spec-clarify` | `$spec-clarify` |
+| slice-deliver | Delivers one slice of a spec as a pull request ready for review; never merges or requests reviewers | `wma-ai-toolkit:slice-deliver` | `$slice-deliver` |
+| commit | Stages and commits finished work as atomic Conventional Commits | `wma-ai-toolkit:commit` | `$commit` |
+| pr-review | Reviews a colleague's pull request and reports findings; never approves or comments | `wma-ai-toolkit:pr-review` | `$pr-review` |
+| pr-preflight | Checks your own pull request before review and fixes mechanical, in-spec findings | `wma-ai-toolkit:pr-preflight` | `$pr-preflight` |
+
+When a task matches one of these skills, follow the skill rather than improvising.
 
 To install it:
 
@@ -54,6 +56,7 @@ The toolkit folder is:
 
 | Task | Rule, under the toolkit folder |
 |---|---|
+| Every task; writing or changing a spec; the ralph loop | `rules/shared/ai-assisted-development.md` |
 | Writing or changing code; adding a dependency | `rules/stack/<Stack rule>.md`, the Repo profile's `Stack rule` |
 | Readability, naming, comments, simplicity | `rules/shared/common-coding.md` |
 | Branches, commit messages, pull requests | `rules/shared/git-workflow.md` |

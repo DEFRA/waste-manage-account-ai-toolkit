@@ -6,10 +6,13 @@ The shared AI-assisted development skills and rules for the Manage Account repos
 
 ```
 skills/<name>/SKILL.md       the skills, in the open Agent Skills format
-rules/shared/*.md            the six shared rules
+rules/shared/*.md            the shared rules, one per topic
 rules/stack/*.md             csharp-dotnet.md, javascript-nodejs.md
 templates/AGENTS.md          the thin per-repo file
 templates/settings.json      the consuming repo's `.claude/settings.json`
+templates/CLAUDE.md          the consuming repo's `CLAUDE.md`, which imports `AGENTS.md`
+templates/PULL_REQUEST_TEMPLATE.md  the common pull request template, completed per repo
+templates/gitignore          the ralph loop entries for the consuming repo's `.gitignore`
 .claude-plugin/              plugin.json and marketplace.json, for Claude Code
 install.sh                   installer for Codex
 AGENTS.md, verify.sh         this repo's own rules and gate

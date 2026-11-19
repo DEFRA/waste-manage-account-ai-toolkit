@@ -4,6 +4,7 @@ set -euo pipefail
 TOOLKIT_REPO="https://github.com/DEFRA/waste-manage-account-ai-toolkit.git"
 TOOLKIT_DIR="${XDG_DATA_HOME:-$HOME/.local/share}/waste-manage-account-ai-toolkit"
 CODEX_SKILLS_DIR="$HOME/.agents/skills"
+TOOLKIT_LINK="$HOME/.wma-ai-toolkit"
 
 usage() {
   echo "Usage: install.sh [--dir <path>]" >&2
@@ -54,5 +55,12 @@ for skill_dir in "$TOOLKIT_DIR"/skills/*/; do
 done
 
 [[ "$skill_count" -gt 0 ]] || fail "no skills found under $TOOLKIT_DIR/skills"
+
+# One fixed path to the toolkit, so a repo's AGENTS.md can name
+# shared-instructions.md without a lookup.
+if [[ -e "$TOOLKIT_LINK" && ! -L "$TOOLKIT_LINK" ]]; then
+  fail "$TOOLKIT_LINK is not a symlink; remove it and run install.sh again"
+fi
+ln -sfn "$TOOLKIT_DIR" "$TOOLKIT_LINK"
 
 echo "Installed $skill_count skills to ~/.agents/skills"

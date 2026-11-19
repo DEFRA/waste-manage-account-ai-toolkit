@@ -17,7 +17,7 @@ Shared by the Manage Account JavaScript repos from the DEFRA [JavaScript standar
 - Do not store session state on the app server. Never tie a session to a particular server instance; use a shared store, not in-process storage.
 - Do not block the event loop or worker pool. Don't do too much work for any client in a single callback or task; push CPU-intensive work to another service.
 - Prefer what Node provides to a dependency: `fetch` for HTTP, `AbortSignal.timeout` for a request timeout, `node:assert/strict` for assertions.
-- The server framework and the test suite's layout are repo-specific; they live in the repo's `AGENTS.md` constraints.
+- The server framework and the test suite's layout are repo-specific; they live in the repo's constraints file.
 
 ### Versions
 

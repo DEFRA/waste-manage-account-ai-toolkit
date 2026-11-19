@@ -44,7 +44,7 @@ require_tool() {
 
 check_shell_scripts() {
   local script
-  for script in install.sh verify.sh skills/*/scripts/*.sh; do
+  for script in install.sh verify.sh hooks/*.sh skills/*/scripts/*.sh; do
     [[ -f "$script" ]] || continue
     shellcheck "$script" || fail "shellcheck reported problems in $script"
   done

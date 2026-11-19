@@ -11,4 +11,4 @@ Shared by the Manage Account repos from the DEFRA [container standards](https://
 - Images are **self-contained** and carry all runtime dependencies; add to an image only what it needs at run time.
 - Images are tagged and versioned by the CDP build action on merge to `main`.
 
-A repo's accepted deviations from these standards, and its local stack, live in the constraints of that repo's `AGENTS.md`.
+A repo's accepted deviations from these standards, and its local stack, live in that repo's constraints file, which its `AGENTS.md` names.

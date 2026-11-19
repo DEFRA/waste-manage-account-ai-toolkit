@@ -44,7 +44,7 @@ Put new code in the existing folder for its role. Do not add parallel folders (`
 ## Validation and DTOs
 
 - Request and response DTOs are records in `Dtos/` with `[JsonPropertyName]` and data annotations. Members the client cannot set do not exist on the request record.
-- Requests use nullable members with `[Required]`, so a missing member is a validation error keyed by JSON path. The DTOs of a version frozen by the repo's `AGENTS.md` constraints stay as they are.
+- Requests use nullable members with `[Required]`, so a missing member is a validation error keyed by JSON path. The DTOs of a version frozen by the repo's constraints file stay as they are.
 - A response envelope, the record an endpoint returns, is named after the endpoint: its `.WithName(...)` value followed by `Response`, which gives `<Verb><Resource>Response`.
 - A response item, a record inside an envelope, is named after the resource, `<Resource>Response`, and is shared between endpoints when the shape is the same. Add a qualifier only when an endpoint's shape differs, and declare the members the shapes have in common once in a base record (`<Resource>ResponseBase`).
 - Validate at the boundary through the endpoint filter and validator pair (`<Verb><Resource>ValidationFilter`, `<Verb><Resource>RequestValidator`): trim before pattern checks, validate every array item, return all errors at once.
@@ -53,14 +53,14 @@ Put new code in the existing folder for its role. Do not add parallel folders (`
 ## Data access
 
 - Postgres: EF Core LINQ on `PostgresDbContext`, `AsNoTracking()` for reads, one `SaveChangesAsync` per unit of work. `EnableRetryOnFailure` is on, so do not open explicit transactions outside the execution strategy. No SQL built from strings; if raw SQL is ever unavoidable, use `FromSql` with interpolated parameters.
-- The schema's owner and how a schema change is made live in the repo's `AGENTS.md` constraints. Entities in `Data/Postgres/Entities` follow the schema, never the other way round.
+- The schema's owner and how a schema change is made live in the repo's constraints file. Entities in `Data/Postgres/Entities` follow the schema, never the other way round.
 - Timestamps come from `TimeProvider` through `TimestampInterceptor`. Never call `DateTime.UtcNow` in domain or persistence code.
 - MongoDB: typed `IMongoCollection<T>` with `Builders<T>.Filter`, never a filter built from a string.
 
 ## API versioning and OpenAPI
 
 - The version comes from the `Accept` header; `/health`, `/openapi` and `/redoc` are not versioned. Do not add URL-path versioning.
-- The frozen versions and the tests that freeze them live in the repo's `AGENTS.md` constraints. New or changed behaviour is an endpoint declaring the next version with `.WithApiVersions(...)`, which may share its path with the earlier version's endpoint.
+- The frozen versions and the tests that freeze them live in the repo's constraints file. New or changed behaviour is an endpoint declaring the next version with `.WithApiVersions(...)`, which may share its path with the earlier version's endpoint.
 - Each version has its own OpenAPI document (`AddOpenApi("v2", ...)` in `Program.cs`) shaped by document, operation and schema transformers. A new version is added to `openApiDocuments` so the ReDoc dropdown lists it. Update the OpenAPI snapshot tests when the contract changes, and only then.
 
 ## Dependencies
@@ -92,8 +92,8 @@ Start from the default criteria in [quality-assurance.md](../shared/quality-assu
 
 | Lens         | Check for                                                                                                                  | Rules to apply |
 | ------------ | -------------------------------------------------------------------------------------------------------------------------- | -------------- |
-| api-contract | Versions frozen by the repo's `AGENTS.md` constraints unchanged, `.WithApiVersions` declared, OpenAPI documents and ReDoc list updated, problem details shapes      | this rule      |
-| data         | Schema changes made as the repo's `AGENTS.md` constraints state, entities match the schema, parameterised access, `TimeProvider` for timestamps | this rule |
+| api-contract | Versions frozen by the repo's constraints file unchanged, `.WithApiVersions` declared, OpenAPI documents and ReDoc list updated, problem details shapes      | this rule      |
+| data         | Schema changes made as the repo's constraints file state, entities match the schema, parameterised access, `TimeProvider` for timestamps | this rule |
 | architecture | Endpoints, Services, Dtos, Mapping layout; thin handlers; options validated on start; DI registration                      | this rule      |
 
 ## Coverage

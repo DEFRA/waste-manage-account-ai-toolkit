@@ -32,6 +32,9 @@ TOOLKIT_ROOT="$(dirname "$(dirname "$(dirname "$(readlink -f <path of this SKILL
 Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
 `TOOLKIT_ROOT`, never under the consuming repository.
 
+The consuming repo's own rules are its `AGENTS.md` and the constraints file that `AGENTS.md`
+names under `## Constraints`. Read both; where they disagree with a toolkit rule, they win.
+
 ## Usage
 
 `/spec-clarify <ticket-id> <one-line idea>` in Claude Code, or `$spec-clarify` in Codex. Without

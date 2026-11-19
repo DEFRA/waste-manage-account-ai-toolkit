@@ -1,0 +1,15 @@
+{
+  "description": "Loads the toolkit's shared instructions at session start in a repo that has a Repo profile",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "bash \"${CLAUDE_PLUGIN_ROOT}/hooks/session-start.sh\""
+          }
+        ]
+      }
+    ]
+  }
+}

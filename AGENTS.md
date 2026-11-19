@@ -17,6 +17,7 @@ templates/PULL_REQUEST_TEMPLATE.md  the common pull request template, completed 
 templates/gitignore          the ralph loop entries for the consuming repo's `.gitignore`
 .claude-plugin/              plugin.json and marketplace.json, for Claude Code
 install.sh                   installer for Codex
+hooks/                       session-start hook that loads shared-instructions.md in Claude Code
 AGENTS.md, verify.sh         this repo's own rules and gate
 tests/*.bats                 bats tests for the shell scripts
 ```

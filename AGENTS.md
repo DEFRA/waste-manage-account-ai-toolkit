@@ -8,7 +8,7 @@ The shared AI-assisted development skills and rules for the Manage Account repos
 skills/<name>/SKILL.md       the skills, in the open Agent Skills format
 rules/shared/*.md            the shared rules, one per topic
 rules/stack/*.md             csharp-dotnet.md, javascript-nodejs.md
-shared-instructions.md             what every consuming repo's AGENTS.md points its tool at: skills, rules lookup
+shared-instructions.md       what every consuming repo's AGENTS.md points its tool at: skills, rules lookup
 templates/AGENTS.md          the thin per-repo file
 templates/constraints.md     the consuming repo's `doc/constraints.md`, its repo-only rules
 templates/settings.json      the consuming repo's `.claude/settings.json`

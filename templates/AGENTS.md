@@ -37,5 +37,10 @@ The toolkit folder is:
 - **Codex:** two levels above the target of the `~/.agents/skills/commit` symlink
   (`readlink -f ~/.agents/skills/commit`).
 
-If the folder cannot be found, stop and tell the developer to install the toolkit: its README
-gives the command for Claude Code and for Codex.
+If the folder cannot be found, or a toolkit skill is not available, stop and tell the developer to
+install the toolkit:
+
+- **Claude Code:** run `claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit`
+  in a terminal, then start a new session.
+- **Codex:** run `install.sh` from the
+  [toolkit repo](https://github.com/DEFRA/waste-manage-account-ai-toolkit); run it again to update.

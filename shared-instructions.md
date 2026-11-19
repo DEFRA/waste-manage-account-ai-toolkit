@@ -17,18 +17,7 @@ Where the two disagree, the repo wins. Never read a rule or a skill from a copy 
 
 ## Skills
 
-| Skill | What it does | Claude Code | Codex |
-|---|---|---|---|
-| spec-clarify | Turns a Jira story, bug or idea into a spec with a Work breakdown; the first step of every story | `wma-ai-toolkit:spec-clarify` | `$spec-clarify` |
-| slice-deliver | Delivers one slice of a spec as a pull request ready for review; never merges or requests reviewers | `wma-ai-toolkit:slice-deliver` | `$slice-deliver` |
-| commit | Stages and commits finished work as atomic Conventional Commits | `wma-ai-toolkit:commit` | `$commit` |
-| pr-review | Reviews a colleague's pull request and reports findings; never approves or comments | `wma-ai-toolkit:pr-review` | `$pr-review` |
-| pr-preflight | Checks your own pull request before review and fixes mechanical, in-spec findings | `wma-ai-toolkit:pr-preflight` | `$pr-preflight` |
-
-When a task matches one of these skills, follow the skill rather than improvising. Stop and tell the developer to install the toolkit when a skill is not available:
-
-- **Claude Code:** accept the prompt to install the `wma-ai-toolkit` plugin on opening the repo, or run `claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit` in a terminal.
-- **Codex:** run `install.sh` from the toolkit repo; run it again to update.
+The toolkit's skills are `spec-clarify`, `slice-deliver`, `commit`, `pr-review` and `pr-preflight`; the tool lists each with its description. When a task matches one of them, follow the skill rather than improvising.
 
 ## Rules
 

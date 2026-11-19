@@ -2,7 +2,9 @@
 
 The shared AI-assisted development skills and rules for the Manage Account repos. Claude Code
 installs it as the `wma-ai-toolkit` plugin; Codex installs it with `install.sh`. Each consuming
-repo keeps only a thin `AGENTS.md`, with its Repo profile, and a `.claude/settings.json`. The
+repo keeps a thin `AGENTS.md`, with its Repo profile, a `doc/constraints.md` with its repo-only
+rules, and a `.claude/settings.json`. Its `AGENTS.md` sends the tool to
+[AGENTS.shared.md](AGENTS.shared.md) here for the skills and the shared rules. The
 design is in [specs/0001-centralise-ai-skills-and-rules.md](specs/0001-centralise-ai-skills-and-rules.md).
 
 ## Install for Claude Code
@@ -36,14 +38,17 @@ example `$commit`.
 ## Onboard a repo
 
 1. Copy [templates/AGENTS.md](templates/AGENTS.md) to the repo's `AGENTS.md` and fill in its
-   Repo profile, constraints and description.
-2. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,
+   description, its Repo profile and its few most important constraints. It stays thin: it sends
+   the tool to [AGENTS.shared.md](AGENTS.shared.md) in the toolkit for the skills and the rules.
+2. Copy [templates/constraints.md](templates/constraints.md) to the repo's `doc/constraints.md`
+   and fill in the rules that exist only in that repo.
+3. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,
    so Claude Code prompts each developer to install the plugin.
-3. Copy [templates/CLAUDE.md](templates/CLAUDE.md) to the repo's `CLAUDE.md`, so Claude Code
+4. Copy [templates/CLAUDE.md](templates/CLAUDE.md) to the repo's `CLAUDE.md`, so Claude Code
    reads `AGENTS.md`.
-4. Copy [templates/PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) to the repo's
+5. Copy [templates/PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) to the repo's
    `.github/PULL_REQUEST_TEMPLATE.md` and replace each `<...>` with what is particular to the repo.
-5. Add the lines of [templates/gitignore](templates/gitignore) to the repo's `.gitignore`.
+6. Add the lines of [templates/gitignore](templates/gitignore) to the repo's `.gitignore`.
 
 ## Change control
 

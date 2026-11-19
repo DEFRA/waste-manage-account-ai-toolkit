@@ -39,6 +39,9 @@ TOOLKIT_ROOT="$(dirname "$(dirname "$SKILL_DIR")")"
 Read every `rules/shared/<name>.md` and `rules/stack/<name>.md` this skill names under
 `TOOLKIT_ROOT`, never under the consuming repository.
 
+The consuming repo's own rules are its `AGENTS.md` and the constraints file that `AGENTS.md`
+names under `## Constraints`. Read both; where they disagree with a toolkit rule, they win.
+
 ## Usage
 
 `/slice-deliver spec 5 slice 1` in Claude Code, `$slice-deliver` in Codex, or plain words. The

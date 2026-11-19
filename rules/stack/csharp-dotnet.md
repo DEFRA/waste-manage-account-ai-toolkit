@@ -15,6 +15,7 @@ Shared by the Manage Account .NET repos from the DEFRA [.NET standards](https://
 - `async`/`await` end to end, passing the request's `CancellationToken`. Never block with `.Result`, `.Wait()` or `GetAwaiter().GetResult()`.
 - Warnings are errors (`TreatWarningsAsErrors` in `Directory.Build.props`) and SonarAnalyzer.CSharp runs on every build. Suppress a rule only with a comment stating the reason, as the `CA1873` line in `.editorconfig` and the `NuGetAuditSuppress` entry do. Never suppress to get a build green.
 - Follow SOLID: one responsibility per class, dependencies injected through small interfaces registered in `Program.cs`.
+- Follow Microsoft's [secure coding guidelines for .NET](https://learn.microsoft.com/en-us/dotnet/standard/security/secure-coding-guidelines) as well as the OWASP guide in [security-logging.md](../shared/security-logging.md).
 
 ## Project layout
 

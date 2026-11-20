@@ -58,7 +58,34 @@ A change to a skill or rule is a reviewed pull request to this repo. Releases ar
 change can be reverted in one place. A merged change reaches every consuming repo with no pull
 request there.
 
+## Test a change to the toolkit
+
+This repo's `.claude/settings.json` installs the plugin like any consuming repo, and the
+installed plugin runs from Claude Code's plugin cache, which follows `main`. A session started
+the usual way therefore runs `main`'s skills and hook, not your branch's. To run your branch's:
+
+- **Claude Code:** start it from your branch's checkout with the branch loaded as the plugin:
+
+  ```bash
+  claude --plugin-dir .
+  ```
+
+  Run the changed skill in this repo, or start Claude Code in a consuming repo with
+  `--plugin-dir` set to this checkout's path.
+- **Codex:** link the skills to this checkout, and back to the installed copy when you are done:
+
+  ```bash
+  bash install.sh --dir .
+  ```
+
+  ```bash
+  bash install.sh
+  ```
+
 ## Before a pull request
 
-Run `./verify.sh`. It checks the toolkit's own files and prints `PASS` when every check passes.
-It needs `shellcheck` and `jq`.
+Run the gate, `./verify.sh` then `bats tests/`, as `AGENTS.md` says. `./verify.sh` checks the
+toolkit's own files and prints `PASS` when every check passes. The gate needs `shellcheck`, `jq`
+and `bats`. Fill in [.github/PULL_REQUEST_TEMPLATE.md](.github/PULL_REQUEST_TEMPLATE.md), which
+GitHub offers when you open the pull request, and read [doc/constraints.md](doc/constraints.md)
+for this repo's own rules.

@@ -37,8 +37,11 @@ this file wins.
 
 ## Continuous integration
 
-- There is no workflow yet. Spec 0003 slice 2 adds `.github/workflows/check-pull-request.yml`,
-  whose job `Run Pull Request Checks` runs the Gate commands, and `.github/CODEOWNERS`.
+- `.github/workflows/check-pull-request.yml` runs on every pull request to `main`. Its one job,
+  `Run Pull Request Checks`, installs `bats` and runs the Gate commands in order: `./verify.sh`,
+  then `bats tests/`. A command added to the Gate commands is added to the job in the same change.
+- `.github/CODEOWNERS` makes the `@DEFRA/waste-manage-account` team the owner of every path, for
+  the ruleset's code-owner review.
 - Branch ruleset `main`, read on 20 November 2026: no deletion; no force push; a pull request
   with one approving review and code-owner review, stale approvals dismissed on push, approval of
   unattributed changes required, and every review thread resolved; squash or merge only; signed

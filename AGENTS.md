@@ -45,6 +45,8 @@ AGENTS.md, verify.sh         this repo's own rules and gate
 doc/constraints.md           this repo's own constraints
 .claude/settings.json        prompts a contributor to install the plugin
 .github/PULL_REQUEST_TEMPLATE.md  this repo's pull request template
+.github/workflows/           the pull request check, which runs the gate
+.github/CODEOWNERS           the code owners the main ruleset asks to review
 tests/*.bats                 bats tests for the shell scripts
 ```
 

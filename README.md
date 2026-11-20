@@ -45,7 +45,8 @@ example `$commit`.
 2. Copy [templates/constraints.md](templates/constraints.md) to the repo's `doc/constraints.md`
    and fill in the rules that exist only in that repo.
 3. Copy [templates/settings.json](templates/settings.json) to the repo's `.claude/settings.json`,
-   so Claude Code prompts each developer to install the plugin.
+   so Claude Code prompts each developer to install the plugin and adds no co-author trailer to
+   commits or footer to pull requests.
 4. Copy [templates/CLAUDE.md](templates/CLAUDE.md) to the repo's `CLAUDE.md`, so Claude Code
    reads `AGENTS.md`.
 5. Copy [templates/PULL_REQUEST_TEMPLATE.md](templates/PULL_REQUEST_TEMPLATE.md) to the repo's

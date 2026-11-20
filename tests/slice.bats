@@ -235,3 +235,37 @@ has_line() {
   has_line "slice_branch=ABC-42-short-slice-2"
   has_line "previous_branch=ABC-42-short-slice-1"
 }
+
+@test "a Notes branch with -slice- before the end keeps its whole name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-slice-thing`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-slice-thing-slice-2"
+}
+
+@test "a Notes branch ending in -slice- without digits keeps its whole name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-short-slice-`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice--slice-2"
+}
+
+@test "a Notes branch that is only the story and a slice gives way to the spec name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-slice-1`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-thing-slice-2"
+  has_line "previous_branch=ABC-42-thing-slice-1"
+}

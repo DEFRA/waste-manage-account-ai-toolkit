@@ -111,10 +111,12 @@ story_key() {
 # The branch a slice gets by convention, <ticket-id>-<slug>-slice-<n>: the name
 # the spec's Notes give, or the spec's file name without its number, then the
 # slice. Slice 1 has the suffix too, so a slice never takes the spec's own branch.
+# Notes may name a slice's branch rather than the story's, so its suffix is dropped.
 slice_branch_name() {
     local number=$1 name
     # shellcheck disable=SC2016  # the backticks are the spec's Markdown, not a command
     name=$(sed -n 's/^- Branch[^`]*`\([^`]*\)`.*/\1/p' "$spec_file" | head -n 1 || true)
+    [[ $name =~ ^(.+)-slice-[0-9]+$ ]] && name=${BASH_REMATCH[1]}
     if [[ -z $name || $name != "$story"-* ]]; then
         name=$(basename "$spec_file" .md)
         name=${name#*-}

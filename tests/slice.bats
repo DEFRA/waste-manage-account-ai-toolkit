@@ -41,6 +41,25 @@ write_spec() {
 EOF
 }
 
+write_spec_with_notes() {
+  local path=$1 notes=$2
+  mkdir -p "$(dirname "$path")"
+  cat > "$path" << EOF
+# Spec
+
+### Work breakdown
+
+| Slice | Work | Verified by |
+|-------|------|-------------|
+| 1 | Add the thing | A test of the thing |
+| 2 | Extend the thing | A test of the extension |
+
+## Notes
+
+$notes
+EOF
+}
+
 commit_fixture() {
   git add -A
   git -c commit.gpgsign=false commit --quiet --no-verify -m fixture
@@ -179,4 +198,74 @@ has_line() {
 
   [ "$status" -eq 0 ]
   has_line "prerequisites=make deps"
+}
+
+@test "a slice branch comes from the spec name when the Notes give no branch" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Nothing about branches.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-thing-slice-2"
+  has_line "previous_branch=ABC-42-thing-slice-1"
+}
+
+@test "a slice branch comes from the story branch the Notes give" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-short`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice-2"
+  has_line "previous_branch=ABC-42-short-slice-1"
+}
+
+@test "a slice branch the Notes give keeps a single slice suffix" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branches: `ABC-42-short-slice-1`, `-slice-2`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice-2"
+  has_line "previous_branch=ABC-42-short-slice-1"
+}
+
+@test "a Notes branch with -slice- before the end keeps its whole name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-slice-thing`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-slice-thing-slice-2"
+}
+
+@test "a Notes branch ending in -slice- without digits keeps its whole name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-short-slice-`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice--slice-2"
+}
+
+@test "a Notes branch that is only the story and a slice gives way to the spec name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-slice-1`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-thing-slice-2"
+  has_line "previous_branch=ABC-42-thing-slice-1"
 }

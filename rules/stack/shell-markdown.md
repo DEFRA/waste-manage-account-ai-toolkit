@@ -14,8 +14,8 @@ this rule follows the shared rules and the conventions already in use. Written 2
 - Quote every expansion. Read input with `read -r`. Use `[[ ]]` for tests and `$( )` for command
   substitution.
 - A script fails with a message on standard error that names what failed and exits non-zero. It
-  never continues after a failed step, and never hides a failure with `|| true` unless an empty
-  result is a normal answer, which a comment then says.
+  never continues after a failed step. `|| true` is only for a command whose empty result is a
+  normal answer, such as a `grep` that finds nothing; never to hide a failure.
 - A function does one thing and is named for it. A comment says why, not what.
 - No secrets, tokens or personal data in a script, a fixture or its output.
 

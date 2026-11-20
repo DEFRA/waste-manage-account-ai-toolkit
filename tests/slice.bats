@@ -180,3 +180,52 @@ has_line() {
   [ "$status" -eq 0 ]
   has_line "prerequisites=make deps"
 }
+
+write_spec_with_notes() {
+  local path=$1 notes=$2
+  mkdir -p "$(dirname "$path")"
+  {
+    printf '# Spec\n\n### Work breakdown\n\n'
+    printf '| Slice | Work | Verified by |\n'
+    printf '|-------|------|-------------|\n'
+    printf '| 1 | Add the thing | A test of the thing |\n'
+    printf '| 2 | Add the other | A test of the other |\n'
+    printf '\n## Notes\n\n%s\n' "$notes"
+  } > "$path"
+}
+
+@test "a slice branch without a Notes branch comes from the spec's file name" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Nothing about branches.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-thing-slice-2"
+  has_line "previous_branch=ABC-42-thing-slice-1"
+}
+
+@test "a slice branch comes from the story branch the Notes give" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branch: `ABC-42-short`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice-2"
+  has_line "previous_branch=ABC-42-short-slice-1"
+}
+
+@test "a slice branch drops the slice suffix of a slice branch the Notes give" {
+  write_profile '| Specs folder | `specs/` |'
+  write_spec_with_notes specs/0007-ABC-42-thing.md '- Branches: `ABC-42-short-slice-1`, `-slice-2`.'
+  commit_fixture
+
+  run "$SLICE" status 7 2
+
+  [ "$status" -eq 0 ]
+  has_line "slice_branch=ABC-42-short-slice-2"
+  has_line "previous_branch=ABC-42-short-slice-1"
+}

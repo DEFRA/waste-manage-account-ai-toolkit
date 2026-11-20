@@ -13,11 +13,16 @@ A repo onboarded with `templates/settings.json` prompts you to install the plugi
 it. To install it by hand, run this in a terminal, not inside a Claude Code session:
 
 ```bash
-claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit
+claude plugin marketplace add DEFRA/waste-manage-account-ai-toolkit
 ```
 
-It adds this repo as a marketplace if it is not one already, and installs the plugin for your
-user, with no dialog. Start a new Claude Code session afterwards. The `/plugin` commands inside
+```bash
+claude plugin install wma-ai-toolkit@waste-manage-account-ai-toolkit
+```
+
+The first command adds this repo as a marketplace, and the second installs the plugin for your
+user, with no dialog. Both work in every Claude Code version with plugins; the one-step
+`--marketplace` flag on `plugin install` exists only in recent versions. Start a new Claude Code session afterwards. The `/plugin` commands inside
 a session do the same through a dialog.
 
 Claude Code then takes updates from this repo. The skills run as `/wma-ai-toolkit:<skill>`, for

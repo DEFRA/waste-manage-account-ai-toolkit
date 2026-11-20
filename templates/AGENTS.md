@@ -36,7 +36,8 @@ every task:
 If it is neither in your context nor at that path, or a toolkit skill is not available, stop and
 ask the developer to install the toolkit:
 
-- **Claude Code:** run `claude plugin install wma-ai-toolkit --marketplace DEFRA/waste-manage-account-ai-toolkit`
-  in a terminal, then start a new session.
+- **Claude Code:** run `claude plugin marketplace add DEFRA/waste-manage-account-ai-toolkit`, then
+  `claude plugin install wma-ai-toolkit@waste-manage-account-ai-toolkit`, in a terminal, then start
+  a new session.
 - **Codex:** run `install.sh` from the
   [toolkit repo](https://github.com/DEFRA/waste-manage-account-ai-toolkit); run it again to update.
